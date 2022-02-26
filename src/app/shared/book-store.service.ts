@@ -45,4 +45,9 @@ export class BookStoreService {
   getAll(): IBook[] {
     return this.books;
   }
+
+  getSingleBy(isbn: string): IBook{
+    let book = this.books.find(book => book.isbn === isbn);
+    return book!; // ! says, that book is never null or undefined
+  }
 }
