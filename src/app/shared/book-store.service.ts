@@ -1,4 +1,6 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import { IBook } from './ibook';
 
 @Injectable({
@@ -6,48 +8,25 @@ import { IBook } from './ibook';
 })
 export class BookStoreService {
 
-  books: IBook[];
+  private api = 'https://api3.angular-buch.com';
 
-  constructor() { 
-    this.books = [
-      {
-        isbn: '9783864906466',
-        title: 'Angular',
-        authors: ['Ferdinand Malcher', 'Johannes Hoppe', 'Danny Koppenhagen'],
-        published: new Date(2019, 4, 30),
-        subtitle: 'Grundlagen, fortgeschrittene Themen und Best Practices - mit NativeScript und NgRx',
-        rating: 5,
-        thumbnails: [
-          {
-            url: 'https://ng-buch.de/buch1.jpg',
-            title: 'Buchcover'
-          }
-        ],
-        description: 'Die Autoren führen Sie mit einem anspruchsvollen Beispielprojekt durch die Welt von Angular...'
-      },
-      {
-        isbn: '9783864903274', 
-        title: 'React', authors: ['Oliver Zeigermann', 'Nils Hartmann'], 
-        published: new Date(2016, 6, 17), 
-        subtitle: 'Die praktische Einführung in React, React Router und Redux', 
-        rating: 3, 
-        thumbnails: [
-          { 
-            url: 'https://ng-buch.de/buch2.jpg', 
-            title: 'Buchcover' 
-          }
-        ], 
-        description: 'React ist ein JavaScript-Framework zur → Entwicklung von Benutzeroberflächen...'
-      }
-    ]
+  constructor(private http: HttpClient) { 
+    
   }
 
-  getAll(): IBook[] {
-    return this.books;
+  getAll(): Observable<IBook[]> {
+    return this.http.get<any[]>(`${this.api}/books`);
   }
 
-  getSingleBy(isbn: string): IBook{
-    let book = this.books.find(book => book.isbn === isbn);
+  getSingleBy(isbn: string): Observable<IBook> {
+    let book = this.http.get<any>(`${this.api}/book/${isbn}`);
     return book!; // ! says, that book is never null or undefined
+  }
+
+  remove(isbn: string): Observable<any> {
+    return this.http.delete(
+      `${this.api}/book/${isbn}`, 
+      { responseType: 'text'}
+    );
   }
 }
