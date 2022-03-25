@@ -1,8 +1,8 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { Observable, throwError } from 'rxjs';
+import { map, retry, catchError } from 'rxjs/operators';
 
 import { IBook } from './ibook';
 import { IBookRaw } from './ibook-raw';
@@ -20,16 +20,15 @@ export class BookStoreService {
     
   }
 
-  getAlll(): Observable<IBook[]> {
-    return this.http.get<any[]>(`${this.api}/books`);
-  }
-
   getAll(): Observable<IBook[]> {
+    console.info('Some test info');
     return this.http
       .get<IBookRaw[]>(`${this.api}/books`)
       .pipe( // <-- here array
+        retry(3),
         map(booksRaw => booksRaw
-          .map(bookRaw => BookFactory.from(bookRaw))) // this 'map' is the array-method, not the rxjs-operator
+          .map(bookRaw => BookFactory.from(bookRaw)), // this 'map' is the array-method, not the rxjs-operator
+        catchError(this.handleError)) 
       );
   }
 
@@ -37,7 +36,9 @@ export class BookStoreService {
     return this.http
       .get<IBookRaw>(`${this.api}/book/${isbn}`)
       .pipe( // <-- here single
-        map(bookRaw => BookFactory.from(bookRaw))
+        retry(3),
+        map(bookRaw => BookFactory.from(bookRaw)),
+        catchError(this.handleError)
       );
   }
 
@@ -46,5 +47,10 @@ export class BookStoreService {
       `${this.api}/book/${isbn}`, 
       { responseType: 'text'}
     );
+  }
+
+  handleError(errorResponse: HttpErrorResponse) : Observable<any> {
+    console.error('Error aufgetreten!');
+    return throwError(errorResponse);
   }
 }

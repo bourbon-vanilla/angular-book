@@ -2,7 +2,7 @@
 
 ## Read (work-) progress info
 
-The page to continue with is <b>254</b> PDF page (book page is smaller by ~30).
+The page to continue with is <b>262</b> PDF page (book page is smaller by ~30).
 
 
 ## Angular Project
