@@ -21,7 +21,6 @@ export class BookStoreService {
   }
 
   getAll(): Observable<IBook[]> {
-    console.info('Some test info');
     return this.http
       .get<IBookRaw[]>(`${this.api}/books`)
       .pipe( // <-- here array
@@ -30,6 +29,18 @@ export class BookStoreService {
           .map(bookRaw => BookFactory.from(bookRaw)), // this 'map' is the array-method, not the rxjs-operator
         catchError(this.handleError)) 
       );
+  }
+
+  getAllSearch(searchTerm: string): Observable<IBook[]> {
+    return this.http
+      .get<IBookRaw[]>(`${this.api}/books/search/${searchTerm}`)
+      .pipe(
+        retry(3),
+        map(booksRaw =>
+          booksRaw.map(bookRaw => BookFactory.from(bookRaw)),
+        ),
+        catchError(this.handleError)
+    );
   }
 
   getSingleBy(isbn: string): Observable<IBook> {
