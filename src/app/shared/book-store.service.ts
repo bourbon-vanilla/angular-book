@@ -1,7 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+
 import { IBook } from './ibook';
+import { IBookRaw } from './ibook-raw';
+import { BookFactory } from './book-factory';
+
 
 @Injectable({
   providedIn: 'root'
@@ -14,13 +20,25 @@ export class BookStoreService {
     
   }
 
-  getAll(): Observable<IBook[]> {
+  getAlll(): Observable<IBook[]> {
     return this.http.get<any[]>(`${this.api}/books`);
   }
 
+  getAll(): Observable<IBook[]> {
+    return this.http
+      .get<IBookRaw[]>(`${this.api}/books`)
+      .pipe( // <-- here array
+        map(booksRaw => booksRaw
+          .map(bookRaw => BookFactory.from(bookRaw))) // this 'map' is the array-method, not the rxjs-operator
+      );
+  }
+
   getSingleBy(isbn: string): Observable<IBook> {
-    let book = this.http.get<any>(`${this.api}/book/${isbn}`);
-    return book!; // ! says, that book is never null or undefined
+    return this.http
+      .get<IBookRaw>(`${this.api}/book/${isbn}`)
+      .pipe( // <-- here single
+        map(bookRaw => BookFactory.from(bookRaw))
+      );
   }
 
   remove(isbn: string): Observable<any> {
