@@ -10,6 +10,7 @@ import { BookDetailsComponent } from './book-details/book-details.component';
 import { HomeComponent } from './home/home.component';
 import { SearchComponent } from './search/search.component';
 import { TokenInterceptor } from './shared/token-interceptor';
+import { LoggerModule, NgxLoggerLevel } from 'ngx-logger';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,13 @@ import { TokenInterceptor } from './shared/token-interceptor';
   imports: [
     HttpClientModule,
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    LoggerModule.forRoot({
+      serverLoggingUrl: 'http://localhost:9200/book-monkey/logs', 
+      level: NgxLoggerLevel.DEBUG, 
+      serverLogLevel: NgxLoggerLevel.DEBUG,
+      disableConsoleLogging: false
+    })
   ],
   providers: [
     {
