@@ -20,7 +20,9 @@ services:
       - xpack.monitoring.enabled=true  
       - xpack.watcher.enabled=false  
       - "ES_JAVA_OPTS=-Xms512m -Xmx512m"  
-      - discovery.type=single-node  
+      - discovery.type=single-node
+      - http.cors.enabled=true
+      - http.cors.allow-origin=*
     networks:  
       - elastic  
     
@@ -49,6 +51,12 @@ In command line where the docker-compose file is placed execute the command:
 ```bash
 docker compose up -d
 ```
+
+You have to enable CORS for the elasticsearch container (see environment variables in the docker-compose file).
+
+## Kibana
+
+In kibana navigate to discovery and add another index ('book-monkey*')
 
 ## Links
 

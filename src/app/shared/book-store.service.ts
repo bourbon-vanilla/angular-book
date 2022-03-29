@@ -7,6 +7,7 @@ import { map, retry, catchError } from 'rxjs/operators';
 import { IBook } from './ibook';
 import { IBookRaw } from './ibook-raw';
 import { BookFactory } from './book-factory';
+import { NGXLogger } from 'ngx-logger';
 
 
 @Injectable({
@@ -16,11 +17,14 @@ export class BookStoreService {
 
   private api = 'https://api3.angular-buch.com/secure';
 
-  constructor(private http: HttpClient) { 
+  constructor(private logger: NGXLogger, private http: HttpClient) { 
     
   }
 
   getAll(): Observable<IBook[]> {
+
+    this.logger.debug(`Get books from the address ${this.api}`); // using the logging
+
     return this.http
       .get<IBookRaw[]>(`${this.api}/books`)
       .pipe( // <-- here array
@@ -32,6 +36,9 @@ export class BookStoreService {
   }
 
   getAllSearch(searchTerm: string): Observable<IBook[]> {
+
+    this.logger.debug(`Get books from the address ${this.api}`); // using the logging
+
     return this.http
       .get<IBookRaw[]>(`${this.api}/books/search/${searchTerm}`)
       .pipe(
