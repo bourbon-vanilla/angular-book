@@ -2,6 +2,18 @@ version: '3.4'
 
 services:
 
+  book-monkey:  
+    container_name: book-monkey
+    hostname: book-monkey
+    image: account/book-monkey-image:latest
+    build: .
+    ports:  
+      - 8080:80  
+    depends_on:  
+      - elasticsearch  
+    networks:  
+      - elastic  
+
   elasticsearch:  
     container_name: elasticsearch
     hostname: elasticsearch
