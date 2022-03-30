@@ -11,6 +11,16 @@ The page to continue with is <b>290</b> PDF page (book page is smaller by ~30).
 
 Please see the description [here](./README-elastic.md).
 
+### Create and run Docker Container
+
+```bash
+# To build a docker image for this application run:
+docker build -t account/book-monkey-image:latest .
+
+# To spin a container up from the created image run:
+docker run -d -p 8080:80 --name book-monkey account/book-monkey-image:latest
+```
+
 ### Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.

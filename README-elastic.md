@@ -60,9 +60,9 @@ In kibana navigate to discovery and add another index ('book-monkey*')
 
 ## Links
 
+* [Ngx-Logger: log to kibana](https://www.xavierbouclet.com/2018/01/17/Ngx-Logger-to-Kibana.html)
+* [Ngx-Logger: log to ngx-logger from angular](https://www.xavierbouclet.com/2018/01/15/Log-in-angular-with-Ngx-Logger.html)
+* [Ngx-Logger: on npmjs](https://www.npmjs.com/package/ngx-logger)
 * [Elastic Home Page](https://www.elastic.co/elastic-stack/)
-* [Serilog Elasicsearch Sink - Github](https://github.com/serilog/serilog-sinks-elasticsearch)
 * [Short Elastic Stack Introduction - LinkedIn](https://www.linkedin.com/pulse/logging-elasticsearch-kibana-aspnet-core-docker-sudheesh-valathil)
 * [Kibana - First Dashboards - Elastic Home Page](https://www.elastic.co/guide/en/kibana/current/create-a-dashboard-of-panels-with-web-server-data.html)
-* [Youtube - elasticsearch.js](https://www.youtube.com/watch?v=h_FzHJSvny4)
-* [Github - elasticsearch.js](https://github.com/elastic/elasticsearch-js)
