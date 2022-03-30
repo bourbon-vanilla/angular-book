@@ -14,11 +14,19 @@ Please see the description [here](./README-elastic.md).
 ### Create and run Docker Container
 
 ```bash
-# To build a docker image for this application run:
+# To build a docker image for this angular application run:
 docker build -t account/book-monkey-image:latest .
 
 # To spin a container up from the created image run:
 docker run -d -p 8080:80 --name book-monkey account/book-monkey-image:latest
+
+# You can also run the container for the image using docker-compose file:
+docker compose up -d
+
+# If due to changes in your application you want to force build you have you can do it like so:
+docker compose build
+
+# Afterwards you can spin up the docker compose as usual.
 ```
 
 ### Development server

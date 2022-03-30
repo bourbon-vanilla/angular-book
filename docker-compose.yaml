@@ -2,10 +2,22 @@ version: '3.4'
 
 services:
 
+  book-monkey:  
+    container_name: book-monkey
+    hostname: book-monkey
+    image: account/book-monkey-image:latest
+    build: .
+    ports:  
+      - 8080:80  
+    depends_on:  
+      - elasticsearch  
+    networks:  
+      - elastic  
+
   elasticsearch:  
     container_name: elasticsearch
     hostname: elasticsearch
-    image: docker.elastic.co/elasticsearch/elasticsearch:7.14.1
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.17.1
     ports:  
       - 9200:9200  
     volumes:  
@@ -23,7 +35,7 @@ services:
   kibana:  
     container_name: kibana  
     hostname: kibana  
-    image: docker.elastic.co/kibana/kibana:7.14.1
+    image: docker.elastic.co/kibana/kibana:7.17.1
     ports:  
       - 5601:5601  
     depends_on:  
