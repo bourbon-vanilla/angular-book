@@ -20,13 +20,20 @@ docker build -t account/book-monkey-image:latest .
 # To spin a container up from the created image run:
 docker run -d -p 8080:80 --name book-monkey account/book-monkey-image:latest
 
-# You can also run the container for the image using docker-compose file:
+# Before using docker compose you have to create a docker volume explicitly, 
+# because it uses an external common volume for the elastic stack.
+docker volume create elastick-stack-volume
+
+# If you dont want to use a centralized docker volume for elastic stack 
+# remove the option 'external: true' for the volume in the docker-compose file.
+
+# Afterward you can create the container for the image using docker-compose file:
 docker compose up -d
 
-# If due to changes in your application you want to force build you have you can do it like so:
+# If due to changes in your application you want to force build you have to do it like so:
 docker compose build
 
-# Afterwards you can spin up the docker compose as usual.
+# New angular application image will be created and afterwards you can spin up the docker compose as usual.
 ```
 
 ### Development server

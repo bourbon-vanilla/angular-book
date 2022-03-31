@@ -21,7 +21,7 @@ services:
     ports:  
       - 9200:9200  
     volumes:  
-      - elasticsearch-data:/usr/share/elasticsearch/data  
+      - elastick-stack-volume:/usr/share/elasticsearch/data  
     environment:  
       - xpack.monitoring.enabled=true  
       - xpack.watcher.enabled=false  
@@ -50,4 +50,5 @@ networks:
     driver: bridge  
   
 volumes:  
-  elasticsearch-data: 
+  elastick-stack-volume: 
+    external: true
