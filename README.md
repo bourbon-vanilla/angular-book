@@ -22,7 +22,8 @@ docker run -d -p 8080:80 --name book-monkey account/book-monkey-image:latest
 
 # Before using docker compose you have to create a docker volume explicitly, 
 # because it uses an external common volume for the elastic stack.
-docker volume create elastick-stack-volume
+docker volume create elasticsearch-volume
+docker volume create kibana-volume
 
 # If you dont want to use a centralized docker volume for elastic stack 
 # remove the option 'external: true' for the volume in the docker-compose file.

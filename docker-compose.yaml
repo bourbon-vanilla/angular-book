@@ -21,7 +21,7 @@ services:
     ports:  
       - 9200:9200  
     volumes:  
-      - elastick-stack-volume:/usr/share/elasticsearch/data  
+      - elasticsearch-volume:/usr/share/elasticsearch/data  
     environment:  
       - xpack.monitoring.enabled=true  
       - xpack.watcher.enabled=false  
@@ -37,7 +37,9 @@ services:
     hostname: kibana  
     image: docker.elastic.co/kibana/kibana:7.17.1
     ports:  
-      - 5601:5601  
+      - 5601:5601
+    volumes:
+      - kibana-volume:/usr/share/kibana/config
     depends_on:  
       - elasticsearch  
     environment:  
@@ -50,5 +52,7 @@ networks:
     driver: bridge  
   
 volumes:  
-  elastick-stack-volume: 
+  elasticsearch-volume: 
+    external: true
+  kibana-volume:
     external: true
