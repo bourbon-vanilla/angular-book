@@ -13,4 +13,19 @@ export class BookFactory {
         };
     }
 
+    static empty() : IBook {
+        return {
+            isbn: '',
+            title: '',
+            authors: [''],
+            published: new Date(),
+            subtitle: '',
+            rating: 0,
+            thumbnails: [
+                { url: '', title: '' }
+            ],
+            description: ''
+        };
+    }
+
 }
