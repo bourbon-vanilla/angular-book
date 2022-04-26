@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { BookFactory } from '../shared/book-factory';
+import { IBook } from '../shared/ibook';
+import { IThumbnail } from '../shared/ithumbnail';
+
 
 @Component({
   selector: 'bm-book-form',
@@ -8,12 +11,22 @@ import { BookFactory } from '../shared/book-factory';
 })
 export class BookFormComponent implements OnInit {
 
-  book = BookFactory.empty();
+  book: IBook;
+  thumbnail: IThumbnail;
 
-  constructor() { }
 
+  constructor() {
+    this.book = BookFactory.empty();
+    this.thumbnail = { url : '', title : ''}
+  }
+
+  
   ngOnInit(): void {
     
+  }
+
+  submitForm(): void {
+
   }
 
 }
