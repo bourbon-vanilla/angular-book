@@ -1,6 +1,9 @@
 import { NgModule } from '@angular/core';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http'
 import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule } from '@angular/forms';
+import { DateValueAccessorModule } from 'angular-date-value-accessor';
+import { LoggerModule, NgxLoggerLevel } from 'ngx-logger';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -10,7 +13,10 @@ import { BookDetailsComponent } from './book-details/book-details.component';
 import { HomeComponent } from './home/home.component';
 import { SearchComponent } from './search/search.component';
 import { TokenInterceptor } from './shared/token-interceptor';
-import { LoggerModule, NgxLoggerLevel } from 'ngx-logger';
+import { BookFormComponent } from './book-form/book-form.component';
+import { CreateBookComponent } from './create-book/create-book.component';
+import { FormMessagesComponent } from './form-messages/form-messages.component';
+
 
 @NgModule({
   declarations: [
@@ -19,7 +25,10 @@ import { LoggerModule, NgxLoggerLevel } from 'ngx-logger';
     BookListItemComponent,
     BookDetailsComponent,
     HomeComponent,
-    SearchComponent
+    SearchComponent,
+    BookFormComponent,
+    CreateBookComponent,
+    FormMessagesComponent
   ],
   imports: [
     HttpClientModule,
@@ -30,7 +39,9 @@ import { LoggerModule, NgxLoggerLevel } from 'ngx-logger';
       level: NgxLoggerLevel.DEBUG, 
       serverLogLevel: NgxLoggerLevel.DEBUG,
       disableConsoleLogging: false
-    })
+    }),
+    FormsModule,
+    DateValueAccessorModule
   ],
   providers: [
     {

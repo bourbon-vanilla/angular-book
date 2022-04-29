@@ -67,6 +67,17 @@ export class BookStoreService {
     );
   }
 
+  create(book: IBook): Observable<any> {
+    this.logger.info('The book will be stored', book);
+    return this.http.post(
+      `${this.api}/book`,
+      book,
+      { responseType: 'text'}
+    ).pipe(
+      catchError(this.handleError)
+    );
+  }
+
   handleError(errorResponse: HttpErrorResponse) : Observable<any> {
     console.error('Error aufgetreten!');
     return throwError(errorResponse);
