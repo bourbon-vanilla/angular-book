@@ -15,6 +15,7 @@ import { SearchComponent } from './search/search.component';
 import { TokenInterceptor } from './shared/token-interceptor';
 import { BookFormComponent } from './book-form/book-form.component';
 import { CreateBookComponent } from './create-book/create-book.component';
+import { FormMessagesComponent } from './form-messages/form-messages.component';
 
 
 @NgModule({
@@ -26,7 +27,8 @@ import { CreateBookComponent } from './create-book/create-book.component';
     HomeComponent,
     SearchComponent,
     BookFormComponent,
-    CreateBookComponent
+    CreateBookComponent,
+    FormMessagesComponent
   ],
   imports: [
     HttpClientModule,
