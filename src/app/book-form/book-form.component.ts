@@ -33,11 +33,21 @@ export class BookFormComponent implements OnInit {
 
 
   public submitForm(): void {
-    // this.book.thumbnails = [ this.thumbnail ];
+    const formValue = this.bookForm.value;
+    console.log(formValue.authors);
+    const authors = (formValue.authors as string[])
+      .filter(author => author);
+    const thumbnails = (formValue.thumbnails as IThumbnail[])
+      .filter(thumbnail => thumbnail.url);
 
-    // this.submitBook.emit(this.book);
-    // this.book = BookFactory.empty();
-    // this.bookForm.reset();
+    const newBook: IBook = {
+      ...formValue,
+      authors,
+      thumbnails
+    };
+
+    this.submitBook.emit(newBook);
+    this.bookForm.reset();
   }
 
   public initForm() {
