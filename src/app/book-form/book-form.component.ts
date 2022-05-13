@@ -33,11 +33,11 @@ export class BookFormComponent implements OnInit {
   }
 
   submitForm(): void {
-    this.book.thumbnails = [ this.thumbnail ];
+    // this.book.thumbnails = [ this.thumbnail ];
 
-    this.submitBook.emit(this.book);
-    this.book = BookFactory.empty();
-    this.bookForm.reset();
+    // this.submitBook.emit(this.book);
+    // this.book = BookFactory.empty();
+    // this.bookForm.reset();
   }
 
   initForm() {

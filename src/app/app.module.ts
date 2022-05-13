@@ -40,7 +40,6 @@ import { FormMessagesComponent } from './form-messages/form-messages.component';
       serverLogLevel: NgxLoggerLevel.DEBUG,
       disableConsoleLogging: false
     }),
-    FormsModule,
     DateValueAccessorModule,
     ReactiveFormsModule
   ],
