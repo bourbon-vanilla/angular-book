@@ -12,27 +12,27 @@ import { IThumbnail } from '../shared/ithumbnail';
 })
 export class BookFormComponent implements OnInit {
   
-  bookForm!: FormGroup;
+  public bookForm!: FormGroup;
   @Output() submitBook = new EventEmitter<IBook>();
 
-  get authors(): FormArray {
+  public get authors(): FormArray {
     return this.bookForm.get('authors') as FormArray;
   }
 
-  get thumbnails(): FormArray {
+  public get thumbnails(): FormArray {
     return this.bookForm.get('thumbnails') as FormArray;
   }
 
-  constructor(private fb: FormBuilder) {
 
-  }
+  constructor(private fb: FormBuilder) { }
 
   
-  ngOnInit(): void {
+  public ngOnInit(): void {
     this.initForm();
   }
 
-  submitForm(): void {
+
+  public submitForm(): void {
     // this.book.thumbnails = [ this.thumbnail ];
 
     // this.submitBook.emit(this.book);
@@ -40,7 +40,7 @@ export class BookFormComponent implements OnInit {
     // this.bookForm.reset();
   }
 
-  initForm() {
+  public initForm() {
     if (this.bookForm)
       return;
     
@@ -60,6 +60,16 @@ export class BookFormComponent implements OnInit {
       published: []
     });
   }
+
+  public addAuthorControl() {
+    this.authors.push(this.fb.control(''));
+  }
+
+  public addThumbnailControl() {
+    this.thumbnails.push(
+      this.fb.group({ url: '', title: '' }));
+  }
+
 
   private buildAuthorsArray(values: string[]): FormArray {
     return this.fb.array(values, Validators.required);

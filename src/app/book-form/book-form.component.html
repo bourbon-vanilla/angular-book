@@ -25,6 +25,8 @@
     </bm-form-messages>
 
     <label>Autoren</label>
+    <button type="button" class="ui mini button"
+        (click)="addAuthorControl()">+ Author</button>
     <div class="fields" formArrayName="authors">
         <div class="sixteen wide field" 
             *ngFor="let c of authors.controls; index as i">
@@ -40,6 +42,8 @@
     <textarea formControlName="description"></textarea>
     
     <label>Bilder</label>
+    <button type="button" class="ui mini button"
+        (click)="addThumbnailControl()">+ Bild</button>
     <div formArrayName="thumbnails">
         <div class="fields"
             *ngFor="let c of thumbnails.controls; index as i"
@@ -50,7 +54,7 @@
             <input formControlName="title" placeholder="Titel">
         </div>
     </div>
-    
+
     <button class="ui button" type="submit" [disabled]="bookForm.invalid">
         Speichern
     </button>
